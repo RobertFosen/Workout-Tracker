@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Workout Tracker</string>
+    <string name="action_settings">Settings</string>
+    <string name="addWorkout">Add A Workout</string>
+    <string name="seePreviousWorkouts">See Previous Workouts</string>
+    <string name="quit">Quit</string>
+    <string name="welcome">Workout Tracker</string>
+
+</resources>
