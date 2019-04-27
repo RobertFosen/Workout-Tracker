@@ -26,16 +26,19 @@ public class MainActivity extends AppCompatActivity {
         quitButton = findViewById(R.id.quit);
     }
 
+    //fires when addworkoutbutton is pressed
     public void onAddWorkoutButtonPress(View v) {
         Intent launchResult = new Intent(this, AddWorkoutActivity.class);
         startActivity(launchResult);
     }
 
+    //fires when seepreviousworkoutsbutton is pressed
     public void onSeePreviousWorkoutsButtonPress(View v) {
         Intent launchPreviousWorkouts = new Intent(this, SeePreviousWorkoutsActivity.class);
         startActivity(launchPreviousWorkouts);
     }
 
+    //closes the app
     public void onQuitButtonPress(View v) {finish();}
 
 
