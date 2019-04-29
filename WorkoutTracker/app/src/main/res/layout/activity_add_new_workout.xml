@@ -6,28 +6,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/numberOfSets"
-        android:layout_width="57dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="231dp"
-        android:layout_marginEnd="111dp"
-        android:layout_marginRight="111dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Sets" />
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:id="@+id/workoutLayout"
+        >
+
+        <LinearLayout
+            android:id="@+id/workoutLayoutLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="210dp">
+
+            <EditText
+                android:id="@+id/liftName"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="Lift Performed" />
+
+
+            <EditText
+                android:id="@+id/weightUsed"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="LBS" />
+
+
+            <EditText
+                android:id="@+id/numberOfSets"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Sets"/>
+
+            <EditText
+                android:id="@+id/numberofReps"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="Reps" />
+
+        </LinearLayout>
+    </LinearLayout>
 
 
     <Button
         android:id="@+id/dateButton"
         android:layout_width="127dp"
         android:layout_height="38dp"
-        android:layout_alignStart="@+id/numberOfSets"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="161dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="159dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
         android:text="Change Date" />
 
     <TextView
@@ -42,33 +87,6 @@
         android:layout_marginTop="168dp"
         android:text="TextView" />
 
-    <EditText
-        android:id="@+id/liftName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginLeft="19dp"
-        android:layout_marginTop="231dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Lift Performed" />
-
-    <EditText
-        android:id="@+id/numberofReps"
-        android:layout_width="57dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="231dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Reps" />
 
     <Button
         android:id="@+id/button2"
@@ -77,9 +95,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="137dp"
-        android:layout_marginLeft="137dp"
-        android:layout_marginTop="324dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginLeft="148dp"
+        android:layout_marginTop="499dp"
+        android:onClick="onAddNewWorkoutButtonClick"
         android:text="Add Another Exercise" />
 
     <Button
@@ -92,7 +111,8 @@
         android:layout_marginEnd="146dp"
         android:layout_marginRight="146dp"
         android:layout_marginBottom="122dp"
-        android:text="Done" />
+        android:text="Done"
+        android:onClick="onDoneAddingWorkoutButtonClick"/>
 
     <Button
         android:id="@+id/backButton"
