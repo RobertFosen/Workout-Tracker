@@ -32,6 +32,9 @@ public class AddWorkoutActivity extends AppCompatActivity implements DatePickerD
     private EditText numOfReps;
     private static final String TAG = "MyActivity";
     private int counter = 0;
+    DatabaseHelper mDatabaseHelper;
+    String currentDateString;
+
 
 
     @Override
@@ -43,6 +46,7 @@ public class AddWorkoutActivity extends AppCompatActivity implements DatePickerD
         weightUsed = (EditText)findViewById(R.id.weightUsed);
         numOfSets = (EditText)findViewById(R.id.numberOfSets);
         numOfReps = (EditText)findViewById(R.id.numberofReps);
+        mDatabaseHelper = new DatabaseHelper(this);
 
         //sets a listener to the change date button which displays the datepickerfragment and
         //will trigger the ondateset function when selected
@@ -66,14 +70,28 @@ public class AddWorkoutActivity extends AppCompatActivity implements DatePickerD
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDateString = DateFormat.getDateInstance().format(c.getTime());
+        currentDateString = DateFormat.getDateInstance().format(c.getTime());
 
         TextView textView = (TextView) findViewById(R.id.dateTextView);
         textView.setText(currentDateString);
     }
 
+    public void AddData(String liftDone, int weightUsed, int numOfSets, int numOfReps, String currentDateString) {
+        boolean insertData = mDatabaseHelper.addData(liftDone, weightUsed, numOfSets, numOfReps, currentDateString);
+
+        if (insertData) {
+            Toast.makeText(this,"Data Successfully Inserted!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     //function called when the user selects the DONE button on the activity
     public void onDoneAddingWorkoutButtonClick(View v) {
+
+        //TODO need to change names of the edittexts so a loop can be run to add each line to database and clear lines
+        //make counter for addnewworkout global and make a private counter in this function and compare them
+        //and make this whole function a while loop that runs until the private counter catches up?
 
         //gets the entered Lift name, weight, sets and reps from the edittexts
         String tempStringFromLiftEditText = liftName.getText().toString();
@@ -93,6 +111,14 @@ public class AddWorkoutActivity extends AppCompatActivity implements DatePickerD
                     }
                 });
         displayWorkout.show();
+
+        if (tempStringFromLiftEditText.length() != 0) {
+            AddData(tempStringFromLiftEditText, tempIntFromWeightUsedEditText, tempIntFromNumOfSetsEditText, tempIntFromNumOfRepsEditText, currentDateString);
+            liftName.setText("");
+        } else {
+            Toast.makeText(this, "You must put something in the text field!", Toast.LENGTH_SHORT);
+        }
+
     }
 
     public void onAddNewWorkoutButtonClick(View v) {
