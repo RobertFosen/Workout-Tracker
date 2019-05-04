@@ -31,9 +31,14 @@ public class AddWorkoutActivity extends AppCompatActivity implements DatePickerD
     private EditText numOfSets;
     private EditText numOfReps;
     private static final String TAG = "MyActivity";
-    private int counter = 0;
+    int counter = 0;
     DatabaseHelper mDatabaseHelper;
     String currentDateString;
+
+    EditText[] liftsDone = new EditText[5];
+    int[] weightsUsed = new int[5];
+    int[] setsDone = new int[5];
+    int[] repsDone = new int[5];
 
 
 
@@ -111,6 +116,7 @@ public class AddWorkoutActivity extends AppCompatActivity implements DatePickerD
                     }
                 });
         displayWorkout.show();
+        Log.i(TAG, "AAAAAAAAAAAAAAAAAA" + liftsDone[0].getText());
 
         if (tempStringFromLiftEditText.length() != 0) {
             AddData(tempStringFromLiftEditText, tempIntFromWeightUsedEditText, tempIntFromNumOfSetsEditText, tempIntFromNumOfRepsEditText, currentDateString);
@@ -126,9 +132,11 @@ public class AddWorkoutActivity extends AppCompatActivity implements DatePickerD
         //uses a counter each time the button is pressed to ensure they cannot overfill the screen
         if (counter < 5) {
 
+
             //matches the layout LinearLayout with the workoutLayout housing the rows of edittexts in the adding workout activity
             LinearLayout layout = (LinearLayout) findViewById(R.id.workoutLayout);
             layout.setOrientation(LinearLayout.VERTICAL);
+
 
             //calls the size of edittexts from other activity
             //only calls one of the smaller three since they are all the same size
@@ -150,6 +158,8 @@ public class AddWorkoutActivity extends AppCompatActivity implements DatePickerD
             liftNameEditTextAdded.setLayoutParams(lparams);
             liftNameEditTextAdded.setHint("Lift Performed");
             row.addView(liftNameEditTextAdded);
+            liftsDone[counter] = liftNameEditTextAdded;
+
 
             //adds four edittexts to the layout underneath the previous ones
             //creates new layout parameters to match the ones above it
