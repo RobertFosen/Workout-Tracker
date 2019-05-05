@@ -12,18 +12,11 @@ import android.view.MenuItem;
 import android.widget.*;
 
 public class MainActivity extends AppCompatActivity {
-    private Button addNewWorkoutButton;
-    private Button seePreviousWorkoutsButton;
-    private Button quitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        addNewWorkoutButton = findViewById(R.id.addWorkout);
-        seePreviousWorkoutsButton = findViewById(R.id.seePreviousWorkouts);
-        quitButton = findViewById(R.id.quit);
     }
 
     //fires when addworkoutbutton is pressed
@@ -39,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //closes the app
-    public void onQuitButtonPress(View v) {finish();}
-
-
+    public void onQuitButtonPress(View v) {
+        finish();
+    }
 }

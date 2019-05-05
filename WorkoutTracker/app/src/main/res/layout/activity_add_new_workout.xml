@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -56,7 +57,7 @@
                 android:layout_width="57dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="number"
                 android:hint="Reps" />
 
         </LinearLayout>
@@ -73,7 +74,9 @@
         android:layout_marginTop="159dp"
         android:layout_marginEnd="44dp"
         android:layout_marginRight="44dp"
-        android:text="Change Date" />
+        android:text="Change Date"
+        android:textColor="@android:color/white"
+        android:background="@drawable/my_button_bg" />
 
     <TextView
         android:id="@+id/dateTextView"
@@ -95,11 +98,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="148dp"
-        android:layout_marginLeft="148dp"
-        android:layout_marginTop="499dp"
+        android:layout_marginStart="147dp"
+        android:layout_marginLeft="147dp"
+        android:layout_marginTop="494dp"
         android:onClick="onAddNewWorkoutButtonClick"
-        android:text="Add Another Exercise" />
+        android:text="Add Another Exercise"
+        android:textColor="@android:color/white"
+        android:background="@drawable/my_button_bg" />
 
     <Button
         android:id="@+id/workoutCompleted"
@@ -108,11 +113,13 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="146dp"
-        android:layout_marginRight="146dp"
-        android:layout_marginBottom="122dp"
-        android:text="Done"
-        android:onClick="onDoneAddingWorkoutButtonClick"/>
+        android:layout_marginEnd="145dp"
+        android:layout_marginRight="145dp"
+        android:layout_marginBottom="130dp"
+        android:background="@drawable/my_button_bg"
+        android:onClick="onDoneAddingWorkoutButtonClick"
+        android:textColor="@android:color/white"
+        android:text="Done" />
 
     <Button
         android:id="@+id/backButton"
@@ -121,9 +128,25 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="144dp"
-        android:layout_marginRight="144dp"
-        android:layout_marginBottom="60dp"
-        android:text="Back" />
+        android:layout_marginEnd="145dp"
+        android:textColor="@android:color/white"
+        android:layout_marginRight="145dp"
+        android:layout_marginBottom="77dp"
+        android:text="Back"
+        android:onClick="onDoneButtonClick"
+        android:background="@drawable/my_button_bg" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="692dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:text="@string/welcome"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

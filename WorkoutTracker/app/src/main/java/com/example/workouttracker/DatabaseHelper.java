@@ -2,6 +2,7 @@ package com.example.workouttracker;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -10,8 +11,6 @@ import java.lang.annotation.Target;
 import java.util.Date;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-
-    private static final String TAG = "DatabaseHelper";
 
     private static final String TABLE_NAME = "workouts_table";
     private static final String COL1 = "ID";
@@ -26,6 +25,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, TABLE_NAME, null, 1);
     }
 
+    //creates the table the data will be stored in
+    //sets the data type that each column will hold
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -39,7 +40,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //function that places the data in the DB
     public boolean addData(String liftDone, int weightUsed, int sets_done, int reps_done, String date) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2, liftDone);
@@ -48,16 +51,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL5, reps_done);
         contentValues.put(COL6, date);
 
-
-        Log.d(TAG, "addData: Adding " + liftDone + " and " + weightUsed + " to " + TABLE_NAME);
-
         long result = db.insert(TABLE_NAME, null, contentValues);
 
-        //if date is inserted incorrectly it will return -1
+        //if data is inserted incorrectly it will return -1
         if (result == -1) {
             return false;
         } else {
             return true;
         }
+    }
+
+    //creates the cursor to hold the data, runs the query which pulls everything from the table, then returns it
+    public Cursor getData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME;
+        Cursor data = db.rawQuery(query, null);
+        return data;
     }
 }
