@@ -1,4 +1,4 @@
-package com.example.workouttracker;
+package com.fosenapps.workouttracker;
 
 import org.junit.Test;
 

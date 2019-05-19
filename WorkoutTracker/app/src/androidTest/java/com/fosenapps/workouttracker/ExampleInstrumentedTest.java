@@ -1,4 +1,4 @@
-package com.example.workouttracker;
+package com.fosenapps.workouttracker;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
