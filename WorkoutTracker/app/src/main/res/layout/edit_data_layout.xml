@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:id="@+id/workoutLayoutEdit"
+        >
+
+        <LinearLayout
+            android:id="@+id/workoutLayoutLineEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="210dp">
+
+            <EditText
+                android:id="@+id/liftNameEdit"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="Lift Performed" />
+
+
+            <EditText
+                android:id="@+id/weightUsedEdit"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="LBS" />
+
+
+            <EditText
+                android:id="@+id/numberOfSetsEdit"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Sets"/>
+
+            <EditText
+                android:id="@+id/numberofRepsEdit"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Reps" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/dateButtonEdit"
+        android:layout_width="127dp"
+        android:layout_height="38dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="159dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:text="Change Date"
+        android:textColor="@android:color/white"
+        android:background="@drawable/my_button_bg" />
+
+    <TextView
+        android:id="@+id/dateTextViewEdit"
+        android:layout_width="139dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="51dp"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="168dp"
+        android:text="TextView" />
+
+
+    <Button
+        android:id="@+id/button2Edit"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="147dp"
+        android:layout_marginLeft="147dp"
+        android:layout_marginTop="494dp"
+        android:onClick="onAddNewWorkoutButtonClick"
+        android:text="Delete"
+        android:textColor="@android:color/white"
+        android:background="@drawable/my_button_bg" />
+
+    <Button
+        android:id="@+id/workoutCompletedEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="145dp"
+        android:layout_marginRight="145dp"
+        android:layout_marginBottom="130dp"
+        android:background="@drawable/my_button_bg"
+        android:textColor="@android:color/white"
+        android:text="Done" />
+
+    <Button
+        android:id="@+id/backButtonEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="145dp"
+        android:textColor="@android:color/white"
+        android:layout_marginRight="145dp"
+        android:layout_marginBottom="77dp"
+        android:text="Back"
+        android:onClick="onDoneButtonClick"
+        android:background="@drawable/my_button_bg" />
+
+    <TextView
+        android:id="@+id/textView2Edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="692dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:text="@string/welcome"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>
