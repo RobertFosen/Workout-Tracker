@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,6 +29,7 @@ public class AddWorkoutActivity extends AppCompatActivity implements DatePickerD
     private EditText numOfReps;
     private boolean everyEditTextIsPopulated;
     private Calendar c;
+
 
     int counter = 0;
     int addToDBCounter = 0;
@@ -114,6 +116,7 @@ public class AddWorkoutActivity extends AppCompatActivity implements DatePickerD
     //function called when the user selects the DONE button on the activity
     public void onDoneAddingWorkoutButtonClick(View v) {
 
+        Log.d(TAG, "onDoneAddingWorkoutButtonClick: ");
         //counter that keeps track of which item is getting added next to iterate through the array
         addToDBCounter = 0;
         //flag that turns false if a field is left blank

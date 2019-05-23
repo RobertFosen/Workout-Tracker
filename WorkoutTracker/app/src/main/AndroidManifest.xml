@@ -19,6 +19,7 @@
         </activity>
         <activity android:name="com.fosenapps.workouttracker.AddWorkoutActivity"></activity>
         <activity android:name="com.fosenapps.workouttracker.SeePreviousWorkoutsActivity"></activity>
+        <activity android:name=".EditDataActivity"></activity>
     </application>
 
 </manifest>

@@ -19,6 +19,7 @@ public class SeePreviousWorkoutsActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
     private ListView mListView;
+    private static final String TAG = "editing";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,17 +50,33 @@ public class SeePreviousWorkoutsActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String name = adapterView.getItemAtPosition(i).toString();
+                finish();
+                Log.i(TAG, "onItemClick: ");
+                String workout = adapterView.getItemAtPosition(i).toString();
 
-                Cursor data = mDatabaseHelper.getItemID(name);
-                int itemID = -1;
+                int itemID = i + 1;
+                Cursor data = mDatabaseHelper.getWorkoutInfo(itemID);
+
+
+                String liftDone = "", date = "", weightUsed = "", setsDone = "", repsDone = "";
                 while(data.moveToNext()) {
+                    Log.d(TAG, "onItemClick: " + data.getString(1));
                     itemID = data.getInt(0);
+                    liftDone = data.getString(1);
+                    weightUsed = data.getString(2);
+                    setsDone = data.getString(3);
+                    repsDone = data.getString(4);
+                    date = data.getString(5);
                 }
                 if(itemID > -1) {
                     Intent editScreenIntent = new Intent(SeePreviousWorkoutsActivity.this, EditDataActivity.class);
                     editScreenIntent.putExtra("id", itemID);
-                    editScreenIntent.putExtra("name", name);
+                    //editScreenIntent.putExtra("name", name);
+                    editScreenIntent.putExtra("lift", liftDone);
+                    editScreenIntent.putExtra("weight", weightUsed);
+                    editScreenIntent.putExtra("sets", setsDone);
+                    editScreenIntent.putExtra("reps", repsDone);
+                    editScreenIntent.putExtra("date", date);
                     startActivity(editScreenIntent);
                 }
             }

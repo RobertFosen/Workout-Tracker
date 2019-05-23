@@ -24,6 +24,13 @@ public class EditDataActivity extends AppCompatActivity {
     private String selectedName;
     private int selectedID;
     private Button doneEditButton;
+    DatabaseHelper mDatabaseHelper;
+    private Button btnDelete;
+    private String selectedLift;
+    private String selectedWeight;
+    private String selectedSets;
+    private String selectedReps;
+    private String selectedDate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,22 +43,49 @@ public class EditDataActivity extends AppCompatActivity {
         numOfSets = (EditText)findViewById(R.id.numberOfSetsEdit);
         numOfReps = (EditText)findViewById(R.id.numberofRepsEdit);
         doneEditButton = (Button)findViewById(R.id.workoutCompletedEdit);
+        mDatabaseHelper = new DatabaseHelper(this);
+        btnDelete = (Button)findViewById(R.id.deleteButton);
 
         Intent recievedIntent = getIntent();
         selectedID = recievedIntent.getIntExtra("id", -1); //-1 is just default
-        selectedName = recievedIntent.getStringExtra("name");
+        selectedLift = recievedIntent.getStringExtra("lift");
+        selectedWeight = recievedIntent.getStringExtra("weight");
+        selectedSets = recievedIntent.getStringExtra("sets");
+        selectedReps = recievedIntent.getStringExtra("reps");
+        selectedDate = recievedIntent.getStringExtra("date");
+
+        date.setText(selectedDate);
+        liftName.setText(selectedLift);
+        weightUsed.setText(selectedWeight);
+        numOfSets.setText(selectedSets);
+        numOfReps.setText(selectedReps);
+
+        //selectedName = recievedIntent.getStringExtra("name");
 
         doneEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String item = liftName.getText().toString();
-                if(!item.equals("")) {
+                String workout = liftName.getText().toString();
 
-                } else {
+                everyEditTextIsPopulated = true;
 
+                if (liftName.getText().toString() == "" || weightUsed.getText().toString() == "" || numOfSets.getText().toString() == "" || numOfReps.getText().toString() == "" || date.getText().toString() == "") {
+                    everyEditTextIsPopulated = false;
                 }
+
+                if(everyEditTextIsPopulated) {
+                    mDatabaseHelper.updateWorkout(Integer.toString(selectedID), liftName.getText().toString(), weightUsed.getText().toString(), numOfSets.getText().toString(), numOfReps.getText().toString(), date.getText().toString());
+                }
+                finish();
             }
 
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDatabaseHelper.deleteName(selectedID, selectedName);
+            }
         });
     }
 }

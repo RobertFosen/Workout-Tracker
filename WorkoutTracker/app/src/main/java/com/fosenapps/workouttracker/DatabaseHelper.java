@@ -66,12 +66,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public Cursor getItemID(String name) {
+    public Cursor getWorkoutInfo(int i) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + COL1 + " FROM " + TABLE_NAME + " WHERE " + COL2 + " = '" + name + "'";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL1 + " = '" + i + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
 
-    //public void updateItem(String n)
+    public void updateWorkout(String id, String newLift, String newWeight, String newSets, String newReps, String newDate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME + " SET " +
+                COL2 + " = '" + newLift + "'," +
+                " " + COL3 + " = '" + newWeight + "'," +
+                " " + COL4 + " = '" + newSets + "'," +
+                " " + COL5 + " = '" + newReps + "'," +
+                " " + COL6 + " = '" + newDate + "' " +
+
+                "WHERE " + COL1 + " = '" + id + "'";
+        db.execSQL(query);
+    }
+
+    public void deleteName(int id, String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = '" + id + "'" + " AND " + COL2 + " = '" + name + "'";
+        db.execSQL(query);
+    }
 }
