@@ -44,22 +44,27 @@ public class SeePreviousWorkoutsActivity extends AppCompatActivity {
             listData.add(data.getString(1) +  "    (" + data.getString(3) + " x " + data.getString(4) + ") @ " + data.getString(2) + "LBS" + "     " + data.getString(5));
         }
 
+        //adds the data from the table to a listadapter then to the listview
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
         mListView.setAdapter(adapter);
 
+        //onclicklistener to handle clicking on a row to edit or delete
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //finishes old activity so non-updated table does not show up after you finish editing this row
                 finish();
                 Log.i(TAG, "onItemClick: ");
                 String workout = adapterView.getItemAtPosition(i).toString();
 
+                //assigned an inferred id based on which row in the listview got clicked
                 int itemID = i + 1;
                 Cursor data = mDatabaseHelper.getWorkoutInfo(itemID);
 
-
+                //creates variables to hold values that get pulled from db
                 String liftDone = "", date = "", weightUsed = "", setsDone = "", repsDone = "";
                 while(data.moveToNext()) {
+                    //assigns values to variables
                     Log.d(TAG, "onItemClick: " + data.getString(1));
                     itemID = data.getInt(0);
                     liftDone = data.getString(1);
@@ -68,6 +73,7 @@ public class SeePreviousWorkoutsActivity extends AppCompatActivity {
                     repsDone = data.getString(4);
                     date = data.getString(5);
                 }
+                //fires if a viable row is chosen
                 if(itemID > -1) {
                     Intent editScreenIntent = new Intent(SeePreviousWorkoutsActivity.this, EditDataActivity.class);
                     editScreenIntent.putExtra("id", itemID);

@@ -3,8 +3,10 @@ package com.fosenapps.workouttracker;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -15,6 +17,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL4 = "sets_done";
     private static final String COL5 = "reps_done";
     private static final String COL6 = "date";
+
+    private static final String TAG = "editing";
+
 
 
     public DatabaseHelper(Context context) {
@@ -39,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //function that places the data in the DB
     public boolean addData(String liftDone, int weightUsed, int sets_done, int reps_done, String date) {
 
+        //adds the data of each values into the specific columns
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2, liftDone);
@@ -66,6 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    //call that gets the values of each column in a row
     public Cursor getWorkoutInfo(int i) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL1 + " = '" + i + "'";
@@ -73,6 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    //updates the values in each column in a table
     public void updateWorkout(String id, String newLift, String newWeight, String newSets, String newReps, String newDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME + " SET " +
@@ -86,9 +94,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    public void deleteName(int id, String name) {
+    //TODO: continue fixing bugs with this function and get the id column to auto increment for the rows "above" the one deleted
+    // to keep everything in line
+    public void deleteName(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = '" + id + "'" + " AND " + COL2 + " = '" + name + "'";
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = '" + id + "'";
         db.execSQL(query);
+
+        long rows = DatabaseUtils.queryNumEntries(db, TABLE_NAME);
+        Log.d(TAG, "deleteName: " + rows);
+
+        for (int i = Integer.parseInt(id) + 1; i <= rows; i++) {
+            Log.d(TAG, "deleteName: " + i);
+            query = "UPDATE " + TABLE_NAME + " SET " + COL1 + " = '" + i + "'";
+            db.execSQL(query);
+        }
     }
 }
