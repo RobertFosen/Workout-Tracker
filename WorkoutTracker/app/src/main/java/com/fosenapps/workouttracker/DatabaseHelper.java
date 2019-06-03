@@ -47,6 +47,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //adds the data of each values into the specific columns
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        //this line here sets the ID to the next ID depending on how many elements are in the table.  Otherwise after something
+        //is deleted, it will continue incrimenting the ID as if that element was still in the table which causes issues with
+        //the way that rows are selected in order to edit or delete them.
+        contentValues.put(COL1, DatabaseUtils.queryNumEntries(db, TABLE_NAME) + 1);
         contentValues.put(COL2, liftDone);
         contentValues.put(COL3, weightUsed);
         contentValues.put(COL4, sets_done);
@@ -93,20 +97,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "WHERE " + COL1 + " = '" + id + "'";
         db.execSQL(query);
     }
-
-    //TODO: continue fixing bugs with this function and get the id column to auto increment for the rows "above" the one deleted
-    // to keep everything in line
+    
     public void deleteName(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
+        //query that deletes element from the table
         String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = '" + id + "'";
         db.execSQL(query);
 
         long rows = DatabaseUtils.queryNumEntries(db, TABLE_NAME);
-        Log.d(TAG, "deleteName: " + rows);
 
-        for (int i = Integer.parseInt(id) + 1; i <= rows; i++) {
-            Log.d(TAG, "deleteName: " + i);
-            query = "UPDATE " + TABLE_NAME + " SET " + COL1 + " = '" + i + "'";
+        //for loop that subtracts one from the ID of all the rows that come after the element that got deleted in order
+        //to keep a continuous stream of IDs in order.
+        for (int i = Integer.parseInt(id) + 1; i <= rows + 1; i++) {
+            query = "UPDATE " + TABLE_NAME + " SET " + COL1 + " = '" + (i-1) + "' " + "WHERE " + COL1 + " = '" + i + "'";
             db.execSQL(query);
         }
     }
